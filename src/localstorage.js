@@ -6,4 +6,7 @@ export default {
 	save (key, items) {
 		window.localStorage.setItem(key, JSON.stringify(items))
 	}
+	// remove() {
+	// 	window.localStorage.clear()
+	// }
 }

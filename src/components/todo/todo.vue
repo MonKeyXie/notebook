@@ -6,6 +6,9 @@
      <div v-if="value.length > 0" @click="handleSubmit" class="add-btn">
        <i>+</i>
      </div>
+     <div  @click="removeOK" class="add-btn">
+      <i>-</i>
+     </div> 
    </div>
    <div class="todo-list">
      <ul>
@@ -44,13 +47,21 @@ import Store from '@/localstorage'
       }
       this.value = ""
       },
+      removeOK(){
+        for(var i=0;i<this.todos.length;i++){
+          if(this.todos[i].done === true){
+            //delete this.todos[i]
+             this.todos.splice(i--,1)
+          }
+        }
+      },
       handleDone(todo){
         todo.done = !todo.done
       }
     },
     watch: {
-      todos: {
-        handler: function(todos) {                   ////////
+      todos: {      //todos的属性发生变化就会触发handler
+        handler: function(todos) {
           Store.save('notebook-todo',todos)
         },
         deep: true
@@ -126,6 +137,8 @@ import Store from '@/localstorage'
           width:100%
           margin:20px 0 0 0
           text-align:center
+          &:hover
+            cursor:pointer
           .circle
             width:20%
             font-size:1.9em
