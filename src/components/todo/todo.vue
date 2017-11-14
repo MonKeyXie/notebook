@@ -1,12 +1,13 @@
 <template>
   <div class="container">
+   <v-header></v-header>
    <div class="input">
      <input type="text" id="todo-input" @keydown.enter.prevent="handleSubmit"
      autofocus="autofocus" placeholder="What to do today?" v-model="value" >
      <div v-if="value.length > 0" @click="handleSubmit" class="add-btn">
        <i>+</i>
      </div>
-     <div  @click="removeOK" class="add-btn">
+     <div v-if="todos.length !== 0" @click="removeOK" class="add-btn">
       <i>-</i>
      </div> 
    </div>
@@ -28,6 +29,7 @@
 
 <script type="ecmascript-6">
 import Store from '@/localstorage'
+import header from 'components/todo/header/header'
 
   export default {
     data () {
@@ -36,6 +38,11 @@ import Store from '@/localstorage'
         todos: Store.fetch('notebook-todo')||[]
       }
     },
+
+    components: {
+      'v-header': header
+    },
+
     methods: {
       handleSubmit(){
         this.todos.unshift({
@@ -80,11 +87,7 @@ import Store from '@/localstorage'
     background: linear-gradient(to bottom,#7cba59,#bbed93)
     color:#fff
     .input
-      position:absolute
-      top:0
-      left:0
-      right:0
-      margin:20px 0
+      margin:0 0 20px 0
       font-size:1.5em
       font-family: aileronthin;
       #todo-input
@@ -120,7 +123,7 @@ import Store from '@/localstorage'
         color:rgba(0,111,111,.5)
     .todo-list
       position:absolute
-      top:81px
+      top:144px
       left:0
       right:0
       bottom:0
