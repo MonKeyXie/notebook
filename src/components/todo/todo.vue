@@ -7,7 +7,7 @@
      <div v-if="value.length > 0" @click="handleSubmit" class="add-btn">
        <i>+</i>
      </div>
-     <div v-if="todos.length !== 0" @click="removeOK" class="add-btn">
+     <div v-if="todos.length !== 0 && value.length == 0" @click="removeOK" class="add-btn">
       <i>-</i>
      </div> 
    </div>
@@ -151,8 +151,10 @@ import header from 'components/todo/header/header'
               height: 32px
               border-radius:50%
               border:1px solid rgba(255 ,255 ,255, 0.4)
+              color: rgba(0,0,0,0,)
             .checkmark-active
               border-color: #515151
+              color: #515151
           .text
             width:70%
             line-height: 32px

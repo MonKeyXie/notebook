@@ -29,6 +29,7 @@ export default {
 html, body
 	height:100%
 	width:100%
+	font-family: Avenir,Helvetica,Arial,sans-serif;
 	.tab
 		display: flex
 		width: 100%

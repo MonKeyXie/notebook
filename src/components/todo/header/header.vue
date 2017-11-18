@@ -5,15 +5,41 @@
           <span class="week">{{aweek[time.getDay()]}}</span>
           <span class="year">{{month[time.getMonth()]}}{{time.getFullYear()}}</span>
       </div>
+      <v-weather :arr=arr></v-weather>
   </div>
 </template>
 
 <script type="ecmascript-6">
+import weather from 'components/todo/header/weather'
+import Weather from 'components/todo/header/getWeather'
+
 export default {
   created () {
     this.time = new Date()
     this.aweek = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
     this.month = ['January', 'February', 'March', 'April ', 'May', 'June', 'Jul', 'August', 'September', 'October', 'November ', 'December']
+    let city = typeof remote_ip_info !== 'undefined' ? remote_ip_info.city : '深圳'
+    let self = this
+    Weather.getJson('http://wthrcdn.etouch.cn/weather_mini?city='+city)
+    .then((obj) => {
+      self.arr = {
+        weat:obj.data.forcast[0].type, //有问题，没获取到data
+        temp:obj.data.forcast[0].type
+      }
+    })
+  },
+  data () {
+    return {
+      remoteIp: {'ret': 1},
+      city: '',
+      arr: {
+        weat:"晴",
+        temp:0
+      }
+    }
+  },
+  components:{
+    'v-weather': weather
   }
 };
 </script>
