@@ -9,6 +9,8 @@ var getJson = (url) => {
     
         function handler() {
           if (this.status === 200) {
+            //这行console不能删除，否则header.vue调用时取不到数据，为什么？
+            console.log(this.response.data);
             resolve(this.response);
           } else {
             reject(new Error(this.statusText));

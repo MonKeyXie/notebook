@@ -21,18 +21,19 @@ export default {
     let city = typeof remote_ip_info !== 'undefined' ? remote_ip_info.city : '深圳'
     let self = this
     Weather.getJson('http://wthrcdn.etouch.cn/weather_mini?city='+city)
-    .then((obj) => {
+    .then((json) => {
       self.arr = {
-        weat:obj.data.forcast[0].type, //有问题，没获取到data
-        temp:obj.data.forcast[0].type
+        weat:json.data.forecast[0].type,
+        temp:json.data.wendu,
+        city:city
       }
     })
   },
   data () {
     return {
       remoteIp: {'ret': 1},
-      city: '',
       arr: {
+        city: '',
         weat:"晴",
         temp:0
       }
